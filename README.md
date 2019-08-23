@@ -6,4 +6,4 @@ It's written in **Angular** and uses **Firebase** as database.
 
 ## Notice
 
-The contents of this repository is a copy of the `src/app` directory of a regular Angular project directory structure.
+The contents of this repository is a copy of the `src/app` directory of a typical Angular project directory structure.

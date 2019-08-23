@@ -1,0 +1,181 @@
+<div>
+  <app-header [currentComponent]="myComponentId" subTitle="Create a new project"
+              i18n-subTitle="@@header_NewProject"></app-header>
+
+  <div class="container">
+    <form #newProjectForm="ngForm">
+      
+      <div class="form-group">
+        <label for="title" class="required strong" i18n="@@field_Title_FormProject">Title:</label>
+        <div class="row my-left-col">
+          <input [(ngModel)]="project.title" class="col-9 my-input" id="title" name="title"
+            i18n-placeholder="@@placeholder_Title_FormProject"
+            placeholder="enter the project title" required #title="ngModel">
+        </div>
+        <div [hidden]="title.valid || title.pristine" class="alert alert-danger"
+              i18n="@@error_Title_FormProject">Project title is required</div>
+      </div>
+  
+      <div class="form-group">
+        <label class="required strong" i18n="@@field_Dates_FormProject">Dates:</label><br>
+        <div class="row my-left-col">
+          <input [(ngModel)]="project.date1" class="col-4 col-md-3 no-padding small-text" type="date" id="date1" name="date1" 
+                  required #date1="ngModel">      
+          <label for="date2" i18n="@@field_Date2_FormProject" class="col-1 very-center no-padding">to</label>
+          <input [(ngModel)]="project.date2" class="col-4 col-md-3 no-padding small-text" type="date" id="date2" name="date2" 
+                  required #date2="ngModel">
+        </div>
+        <div [hidden]="date1.valid || date1.pristine" class="alert alert-danger"
+            i18n="@@error_Date1_FormProject">Initial date is invalid</div>
+        <div [hidden]="date2.valid || date2.pristine" class="alert alert-danger"
+              i18n="@@error_Date2_FormProject">Final date is invalid</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="city" class="required strong" i18n="@@field_City_FormProject">City:</label>
+        <div class="row my-left-col">
+          <select class="col-9 my-select" id="city"
+            [(ngModel)]="project.city" name="city"
+            (ngModelChange)="onSelectCity($event)">
+            <option value='' i18n="@@field_SelectCity_FormProject" selected disabled>Select a city</option>
+            <option *ngFor="let city of allCities"
+              [value]="city.cityCode">{{city.cityName}}
+            </option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="producer" class="required strong" i18n="@@field_Producer_FormProject">Producer:</label>
+        <div class="row my-left-col">
+          <input [(ngModel)]="project.producer" class="col-9 my-input" id="producer" name="producer"
+            i18n-placeholder="@@placeholder_Producer_FormProject"
+            placeholder="enter producer's name" required #producer="ngModel" readonly>
+        </div>
+        <div [hidden]="producer.valid || producer.pristine" class="alert alert-danger"
+              i18n="@@error_Producer_FormProject">Producer's name is required</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email" class="required strong" i18n="@@field_ProdEmail_FormProject">Producer's email:</label>
+        <div class="row my-left-col">
+          <input [(ngModel)]="project.prodEmail" class="col-9 my-input" type="email" id="email" name="email"
+            i18n-placeholder="@@placeholder_ProdEmail_FormProject"
+            placeholder="enter producer's email" required email #email="ngModel">
+        </div>
+        <div *ngIf="email.invalid && email.touched"
+              class="alert alert-danger">
+          <div *ngIf="email.errors.required" i18n="@@error_ProdEmail1_FormProject">Producer's email is required</div>
+          <div *ngIf="email.invalid" i18n="@@error_ProdEmail2_FormProject">Email must have format of user@address</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="phone" class="strong" i18n="@@field_ProdPhone_FormProject">Producer's phone:</label>
+        <div class="row my-left-col">
+          <input [(ngModel)]="project.prodPhone" class="col-9 my-input" id="phone" name="phone"
+            i18n-placeholder="@@placeholder_ProdPhone_FormProject"
+            placeholder="enter producer's phone" pattern="[0-9 \-+()]*" #phone="ngModel">
+        </div>
+        <div *ngIf="phone.invalid && !phone.pristine"
+              class="alert alert-danger">
+          <div *ngIf="phone.errors.required" i18n="@@error_ProdPhone1_FormProject">Producer's phone is required</div>
+          <div *ngIf="phone.invalid" i18n="@@error_ProdPhone2_FormProject">Invalid characters for phone number</div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="budget" class="strong" i18n="@@field_Budget_FormProject">Budget:</label>
+        <div class="row my-left-col">
+          <input [(ngModel)]="project.budget" type="number" id="budget" name="budget">
+          <span>&nbsp;&nbsp;{{project.budget | currency}}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="needed"  class="required strong" i18n="@@field_CrewPositions_FormProject">Crew Positions:</label>
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th i18n="@@field_Position_FormProject" class="my-middle">Position</th>
+                    <th i18n="@@field_Quantity_FormProject" class="very-center">Qty</th>
+                    <th i18n="@@field_Days_FormProject" class="very-center">Days</th>
+                    <th i18n="@@field_Rate_FormProject" class="very-center">Daily Rate</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of neededPositions">
+                <td class="my-middle">{{p.description}}</td>
+                <td class="very-center">{{p.quantity}}</td>
+                <td class="very-center">{{p.days}}</td>
+                <td class="very-center">{{p.rate | currency}}</td>
+                <td class="very-center"><button type="button" (click)="editPosition(p)" class="btn btn-primary btn-responsive">
+                    <span class="my-md my-md-mode_edit"></span></button></td>
+                <td class="very-center"><button type="button" (click)="deletePosition(p)" class="btn btn-danger btn-responsive">
+                    <span class="my-md my-md-delete"></span></button></td>
+              </tr>
+              <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+      </div>
+  
+      <div class="form-group" *ngIf="selectPosition">
+        <span>
+          <select class="form-control" id="position"
+            [(ngModel)]="selectedPosition.code" name="position"
+            (ngModelChange)="onSelectPosition($event)">
+            <option value='' selected disabled 
+                  i18n="@@field_SelectPositionToAdd_FormProject">Select a crew position to add</option>
+            <option *ngFor="let position of allPositions"
+              [value]="position.code">{{position.description}}
+            </option>
+          </select>
+        </span>
+      </div>
+  
+      <div class="form-group" *ngIf="inputPosition">
+          <label class="header-add-position" i18n="@@field_AddPosition_FormProject">Adding {{selectedPosition.description}}</label>
+          <div class="row">
+            <label class="col-4 col-md-2 my-right" i18n="@@field_QuantityColon_FormProject">Qty:</label>
+            <input [(ngModel)]="selectedPosition.quantity" class="very-center col-3 col-md-2" type="number" id="quantity"
+            name="quantity" required #quantity="ngModel">
+          </div>
+          <div class="row">
+            <label class="col-4 col-md-2 my-right" i18n="@@field_DaysColon_FormProject">Days:</label>
+            <input [(ngModel)]="selectedPosition.days" class="very-center col-3 col-md-2" type="number" id="days"
+            name="days" required #days="ngModel">
+          </div>
+          <div class="row">
+            <label class="col-4 col-md-2 my-right" i18n="@@field_RateColon_FormProject">Daily Rate:</label>
+            <input [(ngModel)]="selectedPosition.rate" class="very-center col-3 col-md-2" type="number" id="rate"
+              name="rate" required #rate="ngModel">
+          </div>
+          <div id="add-position-buttons" class="row">
+            <div class="col-4 col-md-2"></div>
+            <button type="button" (click)="addPosition(selectedPosition)"
+              class="btn btn-success"><span class="my-md my-md-check"></span></button>
+            <div class="col-2 text-center">
+              <button type="button" (click)="addPosition(null)"
+                  class="btn btn-danger"><span class="my-md my-md-clear"></span></button>
+            </div>
+          </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="other" class="strong" i18n="@@field_OtherInfo_FormProject">Other information:</label><br>
+        <textarea [(ngModel)]="project.otherInfo" class="form-control" rows="5" id="other" 
+          name="other" i18n-placeholder="@@placeholder_OtherInfo_FormProject"
+          placeholder="enter any other relevant information" maxlength=2000>
+        </textarea>
+      </div>
+    
+      <button type="button" (click)="createProject(project, neededPositions, newProjectForm)" 
+        class="btn btn-success" [disabled]="!newProjectForm.form.valid"
+        i18n="@@button_create_NewProject">create</button>
+      <button type="button" (click)="clearForm()" class="btn btn-danger" i18n="@@button_clear_NewProject">clear</button>
+      
+    </form>
+  </div>
+</div>

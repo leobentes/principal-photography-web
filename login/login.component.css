@@ -1,0 +1,13 @@
+.container-login {
+    margin-top: 15px;
+}
+.pp-login-msg {
+    color: #FFF;
+    margin-bottom: 0;
+}
+
+@media(min-width: 768px) {
+    .pp-login-msg {
+        font-size: 1.4rem;
+    }
+}

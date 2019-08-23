@@ -1,0 +1,13 @@
+<div>
+    <app-header [currentComponent] = "myComponentId"></app-header>
+    <div class="container-fluid main-wrapper">
+        <div class="full-width-image">
+            <div class="container landing-wrapper">
+                <div class="landing-banner text-center">
+                        <div class="pp-login-msg" i18n="@@pleaseSignIn_Login">Please sign-in to create or edit your projects</div>
+                        <firebase-ui (signInSuccess)="successCallback($event)"></firebase-ui>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

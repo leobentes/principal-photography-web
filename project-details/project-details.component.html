@@ -1,0 +1,71 @@
+<div>
+  <div>
+      <app-header [currentComponent]="myComponentId" subTitle="Project details" 
+                    i18n-subTitle="@@header_ProjectDetails"></app-header>
+  </div>
+  <div class="container">
+      <div *ngIf="!projectLoaded" i18n="@@msg_Loading_ProjectDetails">Loading...</div>
+      <div *ngIf="projectLoaded">
+        <div class="strong" i18n="@@field_Title_FormProject">Title:</div>
+        {{projectToShow.title}}
+        <p>
+        <div class="strong" i18n="@@field_Dates_FormProject">Dates:</div>
+        {{projectToShow.date1 | date:dateFormat}}
+        <span i18n="@@field_Date2_FormProject">&nbsp;to&nbsp;</span>
+        {{projectToShow.date2 | date:dateFormat}} 
+        <p>
+        <div class="strong" i18n="@@field_City_FormProject">City:</div>
+        {{projectToShow.city | getCityName:currentLanguage}}
+        <p>
+        <div class="strong" i18n="@@field_Producer_FormProject">Producer:</div>
+        {{projectToShow.producer}}
+        <p>
+        <div class="strong" i18n="@@field_ProdEmail_FormProject">Producer's email:</div>
+        {{projectToShow.prodEmail}}
+        <p>
+        <div class="strong" i18n="@@field_ProdPhone_FormProject">Producer's phone:</div>
+        {{projectToShow.prodPhone}}
+        <p>
+        <div class="strong" i18n="@@field_Budget_FormProject">Budget:</div>
+        {{projectToShow.budget | currency}}
+        <p>       
+        <div class="strong" i18n="@@field_CrewPositions_FormProject">Crew Positions:</div>
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th i18n="@@field_Position_FormProject" class="my-middle">Position</th>
+                    <th i18n="@@field_Quantity_FormProject" class="very-center">Qty</th>
+                    <th i18n="@@field_Days_FormProject" class="very-center">Days</th>
+                    <th i18n="@@field_Rate_FormProject" class="very-center">Daily Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let p of neededPositions">
+                <td class="my-middle">{{p.description}}</td>
+                <td class="very-center">{{p.quantity}}</td>
+                <td class="very-center">{{p.days}}</td>
+                <td class="very-center">{{p.rate | currency}}</td>
+            </tr>
+            <tr><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+        <div class="strong" i18n="@@field_OtherInfo_FormProject">Other information:</div>        
+        <div class="new-line">{{projectToShow.otherInfo}}</div>
+
+        <br>
+        <div class="row align-items-center">
+            <div class="col-2">
+                <button [routerLink]="['/all']" class="btn btn-primary">
+                    <span class="my-md my-md-arrow_back"></span>
+                </button> 
+            </div>
+            <div class="col-2">
+                <button (click)="copyLink()" style="font-size: 1.3rem" class="btn btn-info">
+                    <span class="my-md my-md-share"></span>
+                </button>
+            </div>
+        </div>
+        <p>
+      </div>     
+  </div>
+</div>

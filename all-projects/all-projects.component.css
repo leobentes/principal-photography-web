@@ -1,0 +1,34 @@
+
+.all-projects {
+    margin-top: 15px;
+}
+
+.form-control[readonly] {
+    border: 0;
+    background-color: #fff;
+}
+
+.new-line {
+    white-space: pre-line;
+}
+
+.projects-list td {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.very-center {
+    vertical-align: middle;
+    text-align: center;
+}
+
+@media (max-width: 767.98px) {
+    .btn-responsive1 {
+        font-size: 0.9rem;
+    }
+    
+    .smaller-text {
+        font-size: 0.9rem;
+    }
+}
+

@@ -1,0 +1,20 @@
+.container-help {
+    margin-top: 15px;
+}
+
+.no-border {
+    border: 0;
+}
+
+.faq-card {
+    padding: 10px;
+}
+
+.faq-card-header {
+    border-bottom: 0;
+    background-color: #d0d4d8;
+}
+
+.faq-card-body {
+    padding-top: 0.5rem;
+}

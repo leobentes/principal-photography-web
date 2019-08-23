@@ -1,0 +1,73 @@
+.main-wrapper {
+    height: 100vh;  
+}
+
+.full-width-image {
+    width: 100%;
+    height: 100%;
+    background: url(/assets/images/landing/feet-dolly.jpg) center center;
+    background-size: cover;
+  }
+  
+.landing-banner {
+	color: #FFF;
+	background-color: rgba(0, 0, 0, .3);
+	padding: 20px;
+	width: 80%;
+	border-radius: 5px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: .3s;
+}
+
+.landing-questions {
+    font-size: 1rem;
+}
+
+.landing-questions-margins {
+    margin-top: 1rem;
+}
+
+@media(min-width: 375px) {
+    .landing-questions {
+        font-size: 1.2rem;
+    }
+}
+
+@media(min-width: 768px) {
+	.landing-wrapper {
+		position: relative;
+		height: 100%;
+    }	
+    
+    .landing-banner {
+		left: 0;
+		transform: translate(90%, -50%);
+        width: 50%;
+        top: 40%;
+	}
+
+    .landing-questions {
+        font-size: 1.4rem;
+    }
+
+    .landing-questions-margins {
+        margin-top: 1rem;
+    }
+
+    .btn-responsive {
+        font-size: 1.2rem;
+    }
+}
+
+@media(min-width: 992px) {
+    .landing-questions {
+        font-size: 1.8rem;
+    }
+
+    .btn-responsive {
+        font-size: 1.4rem;
+    }
+}

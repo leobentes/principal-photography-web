@@ -1,0 +1,38 @@
+.container {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.projects-list td {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.very-center {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.align-buttons {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+@media (max-width: 767.98px) {
+    .btn-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .smaller-text {
+        font-size: 0.9rem;
+    }
+
+    .align-project {
+        padding-left: 30px;
+    }
+
+    .align-buttons {
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+}

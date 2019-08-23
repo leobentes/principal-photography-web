@@ -1,0 +1,13 @@
+.my-fa {
+    font-size: 1.7em;
+}
+
+.share-align {
+    text-align: right;
+}
+
+@media(min-width: 768px) {
+    .share-align {
+        text-align: center;
+    }
+}

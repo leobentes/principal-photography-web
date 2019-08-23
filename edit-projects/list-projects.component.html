@@ -1,0 +1,41 @@
+<div>
+    <app-header *ngIf="!editMode" [currentComponent]="myComponentId" subTitle="My projects"
+                        i18n-subTitle="@@header_list_ListProjects"></app-header>
+    <app-header *ngIf="editMode" [currentComponent]="myComponentId" subTitle="Edit project"
+                        i18n-subTitle="@@header_edit_ListProjects"></app-header>
+
+    <div class="container">
+        <div class="form-group" *ngIf="!editMode">
+                <div class="row" *ngFor="let project of projectsList; index as i">
+                    <div class="col-12 col-md-6 align-project"><span class="strong">{{ i+1 }}) {{ project.title }}</span><br>
+                        <div>
+                            {{ project.date1 | date:dateFormat }}
+                            <span> - </span>
+                            {{ project.date2 | date:dateFormat }}<br>
+                            {{ project.city | getCityName:currentLanguage}}
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-2 align-buttons">
+                        <button (click)="editProject(project)" class="btn btn-primary btn-lg">
+                            <span class="my-md my-md-mode_edit"></span>
+                        </button>
+                    </div>
+                    <div class="col-4 col-md-2 align-buttons">
+                        <button (click)="copyLink(project)" class="btn btn-info btn-lg">
+                            <span class="my-md my-md-share"></span>
+                        </button>
+                    </div>
+                    <div class="col-4 col-md-2 align-buttons">
+                        <button (click)="deleteProject(project)" class="btn btn-danger btn-lg">
+                            <span class="my-md my-md-delete"></span>
+                        </button>
+                    </div>
+                    <hr class="col-12">
+                </div>
+            
+        </div>
+    </div>
+    <div *ngIf="editMode">
+        <app-edit-project [projectToEdit]="projectToEdit" (onEdited)="onEdited($event)"></app-edit-project>
+    </div>
+</div>

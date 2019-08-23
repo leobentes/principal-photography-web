@@ -1,0 +1,63 @@
+<div>
+    <div>
+        <app-header [currentComponent]="myComponentId" subTitle="Browse Projects"
+                    i18n-subTitle="@@header_AllProjects"></app-header>
+    </div>
+    <div class="container">
+        <div>
+            <form>
+                <div class="form-group">
+                    <div class="row text-center">
+                        <label for="city" class="col-3 col-md-2 no-padding text-right" i18n="@@field_City_FormProject">City:&nbsp;</label>
+                        <select class="col-8 col-md-9 my-select" id="city" [(ngModel)]="selectedCity.cityCode" name="city" (ngModelChange)="onSelectCity($event)">
+                            <option value='' i18n="@@field_SelectCity_FormProject" selected disabled>Select a city</option>
+                            <option *ngFor="let city of allCities"
+                                [value]="city.cityCode">{{city.cityName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row text-center">
+                        <label for="position" class="col-3 col-md-2 no-padding text-right" i18n="@@field_Position_AllProjects">Position:&nbsp;</label>
+                        <select class="col-8 col-md-9 my-select" id="position" [(ngModel)]="selectedPositionCode" name="position" (ngModelChange)="onSelectPosition($event)">
+                            <option value='' i18n="@@field_SelectPosition_AllProjects" selected>* All Positions *</option>
+                            <option *ngFor="let position of allPositions"
+                                [value]="position.code">{{position.description}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div *ngIf="!projectsInThisCity" class="text-center">
+                <div class="strong" i18n="@@msg_NoProjects_AllProjects">There are no new projects happening in this city.</div>
+                <div class="strong" i18n="@@msg_Reminder_AllProjects">Remind your producer friends to register their projects here.</div>
+                <share-buttons [include]="['facebook','twitter','google','whatsapp','messenger','telegram','email']"
+                [url]="'https://principalphotography-app.firebaseapp.com'"></share-buttons>
+            </div>
+            <div class="form-group">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr class="projects-list" *ngFor="let project of projectsList | filterProjectsByPosition:selectedPositionBits; index as i">
+                        <td><span class="strong">{{ i+1 }}) {{ project.title }}</span><br>
+                            <div class="smaller-text">
+                                {{ project.date1 | date:dateFormat }}
+                                <span> - </span>
+                                {{ project.date2 | date:dateFormat }}<br>
+                                <span i18n="@@field_Producer_FormProject">Producer:</span> {{ project.producer}}
+                            </div>
+                        </td>
+                        <td class="very-center">
+                            <button [routerLink]="['/filming', selectedCity.cityCode, project.id]" class="btn btn-primary btn-lg btn-responsive1">
+                                <span class="my-md my-md-movie"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>        
+    </div>
+
+</div>
+  

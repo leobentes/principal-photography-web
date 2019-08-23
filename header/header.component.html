@@ -1,0 +1,76 @@
+<div *ngIf="afAuth.authState | async as user; else loginBlock">
+
+    <header class="container-fluid pp-header">
+        <div class="row align-items-center">
+            <div class="col-9 pp-title">
+                <span i18n="@@title_Header">Principal Photography</span>
+            </div>
+            <div class="col-3 pp-lang text-right">
+                <div class="dropdown">
+                    <a class="btn btn-menu" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="my-md my-md-menu"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right menu-header" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item text-right" i18n="@@menuStart_Header" [routerLink]="['/landing']">Start over</a>
+                        <a class="dropdown-item text-right" i18n="@@menuHelp_Header" [routerLink]="['/help']">Help</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-right" i18n="@@menuBrowse_Header" [routerLink]="['/all']">Browse projects</a>
+                        <a class="dropdown-item text-right" i18n="@@menuEdit_Header" [routerLink]="['/edit']">Edit projects</a>
+                        <a class="dropdown-item text-right" i18n="@@menuNew_Header" [routerLink]="['/new']">New project</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-right" [routerLink]="" (click)="logout()">Logout</a>
+                        <div class="dropdown-divider"></div>
+                        <a *ngIf="currentLanguage == 'en-US'" class="dropdown-item text-right" href="/pt/">Português</a>
+                        <a *ngIf="currentLanguage != 'en-US'" class="dropdown-item text-right" href="/en/">English</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-9 pp-user">
+                {{ user.displayName }}<br>
+                {{ user.email }}
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid sub-header component-title">{{subTitle}}</div>
+</div>
+
+<ng-template #loginBlock>
+
+    <header class="container-fluid pp-header">
+        <div class="row align-items-center">
+            <div class="col-9 pp-title">
+                <span i18n="@@title_Header">Principal Photography</span>
+            </div>
+            <div class="col-3 pp-lang text-right">
+                <div class="dropdown">
+                    <a class="btn btn-menu" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="my-md my-md-menu"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right menu-header" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item text-right" i18n="@@menuStart_Header" [routerLink]="['/landing']">Start over</a>
+                        <a class="dropdown-item text-right" i18n="@@menuHelp_Header" [routerLink]="['/help']">Help</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-right" i18n="@@menuBrowse_Header" [routerLink]="['/all']">Browse projects</a>
+                        <a class="dropdown-item text-right" i18n="@@menuEditLogin_Header" [routerLink]="['/login/edit']">Edit projects (login)</a>
+                        <a class="dropdown-item text-right" i18n="@@menuNewLogin_Header" [routerLink]="['/login/new']">New project (login)</a>
+                        <div class="dropdown-divider"></div>
+                        <a *ngIf="currentLanguage == 'en-US'" class="dropdown-item text-right" href="/pt/">Português</a>
+                        <a *ngIf="currentLanguage != 'en-US'" class="dropdown-item text-right" href="/en/">English</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-9 pp-user">
+                <span class="pp-login-msg" i18n="@@pleaseLogin_Header">Please
+                    <a class="badge badge-menu" [routerLink]="['/login/edit']">login</a> 
+                    to create or edit your projects</span>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid sub-header component-title">{{subTitle}}</div>
+    
+</ng-template>
+

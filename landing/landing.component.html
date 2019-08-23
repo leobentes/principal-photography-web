@@ -1,0 +1,21 @@
+
+<div>
+  <app-header [currentComponent] = "myComponentId"></app-header>
+  <div class="container-fluid main-wrapper">
+    <div class="full-width-image">
+      <div class="container landing-wrapper">
+        <div class="landing-banner text-center">
+            <div class="landing-questions" i18n="@@questionNew_Landing">New here or weak memory?</div>
+             <button [routerLink]="['/help']" class="btn btn-primary btn-block btn-responsive"
+                      i18n="@@optionStart_Landing">Getting started</button>
+            <div class="landing-questions landing-questions-margins" i18n="@@questionCrew_Landing">Crew member?</div>
+            <button [routerLink]="['/all']" class="btn btn-primary btn-block btn-responsive"
+                      i18n="@@optionBrowse_Landing">Browse for projects</button>
+            <div class="landing-questions landing-questions-margins" i18n="@@questionProducer_Landing">Producer?</div>
+            <button [routerLink]="['/edit']" class="btn btn-primary btn-block btn-responsive"
+                      i18n="@@optionEdit_Landing">Edit your projects</button>      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

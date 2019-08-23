@@ -1,0 +1,108 @@
+
+.pp-header {
+    background-color: #1565c0;
+    color: #FFF;
+    padding-top: 10px;
+	padding-bottom: 10px;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+}
+
+.pp-logout .badge {
+    font-size: 55%;
+    font-weight: 350;
+}
+
+.pp-title {
+    margin-bottom: 0;
+}
+
+.pp-user {
+    font-size: 0.7rem;
+}
+
+.pp-lang {
+    font-size: 0.7rem;
+}
+
+.pp-lang a {
+    color: #FFF;
+}
+
+.pp-login-msg {
+    color: #FFF;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.pp-menu {
+    font-size: 0.7rem;
+}
+
+.menu-header {
+    color: #FFF;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.dropdown-menu > a:hover {
+    background-color: #1565c0;
+    background-image: none;
+}
+
+.sub-header {
+    background-color: #5e92f3;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 15px;
+  
+}
+
+.btn-menu {
+    background-color: #5e92f3;
+    border-color: #5e92f3;
+}
+
+.badge-menu {
+    color: #fff;
+    background-color: #5e92f3;
+}
+
+@media (max-width: 424.98px) { 
+    .pp-header {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 767.98px) { 
+    .pp-btn-menu {
+        display: flex;
+        justify-content: space-around;
+    }
+    .btn-responsive {
+        font-size: 0.75rem;
+    }
+}
+
+@media(min-width: 768px) {
+    .pp-header {
+        font-size: 2rem;
+    }
+
+    .pp-user {
+        font-size: 1rem;
+    }
+
+    .pp-lang {
+        font-size: 1rem;
+    }
+
+    .pp-menu {
+        font-size: 1.75rem;
+    }
+
+    .pp-btn-menu .btn-responsive {
+        padding:4px 9px;
+        font-size:110%;
+        line-height: 1.2;
+    }
+}
